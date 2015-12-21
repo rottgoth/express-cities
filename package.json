@@ -4,14 +4,15 @@
   "description": "Example application using express.js",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test.js",
-    "testw": "mocha -w app.js test.js"
+    "test": "NODE_ENV=test mocha -w app.js test.js"
   },
   "author": "Rob Cataneo <robcataneo@gmail.com> (https://github.com/rottgoth)",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.14.2",
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "hiredis": "0.4.1",
+    "redis": "2.4.2"
   },
   "devDependencies": {
     "mocha": "2.3.4",

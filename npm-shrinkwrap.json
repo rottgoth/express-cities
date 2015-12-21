@@ -347,6 +347,40 @@
           "resolved": "https://registry.npmjs.org/vary/-/vary-1.0.1.tgz"
         }
       }
+    },
+    "hiredis": {
+      "version": "0.4.1",
+      "from": "hiredis@*",
+      "resolved": "https://registry.npmjs.org/hiredis/-/hiredis-0.4.1.tgz",
+      "dependencies": {
+        "bindings": {
+          "version": "1.2.1",
+          "from": "bindings@*",
+          "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
+        },
+        "nan": {
+          "version": "2.1.0",
+          "from": "nan@>=2.0.5 <3.0.0",
+          "resolved": "https://registry.npmjs.org/nan/-/nan-2.1.0.tgz"
+        }
+      }
+    },
+    "redis": {
+      "version": "2.4.2",
+      "from": "redis@*",
+      "resolved": "https://registry.npmjs.org/redis/-/redis-2.4.2.tgz",
+      "dependencies": {
+        "double-ended-queue": {
+          "version": "2.1.0-0",
+          "from": "double-ended-queue@>=2.1.0-0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz"
+        },
+        "redis-commands": {
+          "version": "1.0.1",
+          "from": "redis-commands@>=1.0.1 <2.0.0",
+          "resolved": "https://registry.npmjs.org/redis-commands/-/redis-commands-1.0.1.tgz"
+        }
+      }
     }
   }
 }

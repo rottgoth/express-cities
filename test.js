@@ -2,6 +2,11 @@
 var request = require('supertest');
 var app = require('./app');
 
+var redis = require('redis');
+var client = redis.createClient();
+client.select('test'.length);
+client.flushdb();
+
 describe('Requests to the root path', function() {
   it('Returns a 200 status code', function(done) {
     request(app)
@@ -23,6 +28,13 @@ describe('Requests to the root path', function() {
 });
 
 describe('Listing cities on /cities', function() {
+  // if we were to add test data to our database
+  // before(function() {
+  //   client.hset('cities', 'Colima', 'Some description');
+  //   client.hset('cities', 'San Francisco', 'cool description');
+  //   client.hset('cities', 'Oakland', 'super far description');
+  // });
+
   it('Returns 200 status code', function(done) {
     request(app)
       .get('/cities')
@@ -38,11 +50,17 @@ describe('Listing cities on /cities', function() {
   it('Returns initial cities', function(done) {
     request(app)
       .get('/cities')
-      .expect(JSON.stringify(['Colima', 'San Francisco', 'Oakland']), done);
+      .expect(JSON.stringify([]), done);
+      // if we load some data we can asset is resturned
+      // .expect(JSON.stringify(['Colima', 'San Francisco', 'Oakland']), done);
   });
 });
 
 describe('Creating new cities', function() {
+  before(function() {
+
+  });
+
   it('Returns a 201 status code', function(done) {
     request(app)
       .post('/cities')
