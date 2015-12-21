@@ -32,10 +32,15 @@ app.get('/cities', function(request, response) {
 
 app.post('/cities', urlencode, function(request, response) {
   var newCity = request.body;
-  client.hset('cities', newCity.name, newCity.description, function(error) {
-    if (error) throw error;
-    response.status(201).json(newCity.name);
-  });
+  if (!newCity.name || !newCity.description) {
+    response.sendStatus(400);
+    return false;
+  } else {
+    client.hset('cities', newCity.name, newCity.description, function(error) {
+      if (error) throw error;
+      response.status(201).json(newCity.name);
+    });
+  }
 });
 
 app.delete('/cities/:name', function(request, response) {

@@ -57,22 +57,25 @@ describe('Listing cities on /cities', function() {
 });
 
 describe('Creating new cities', function() {
-  before(function() {
-
-  });
-
   it('Returns a 201 status code', function(done) {
     request(app)
       .post('/cities')
-      .send('name=Springfield&descriptions=Where+the+simpsons+live')
+      .send('name=Springfield&description=Where+the+simpsons+live')
       .expect(201, done);
   });
 
   it('Return a city name', function(done) {
     request(app)
       .post('/cities')
-      .send('name=Springfield&descriptions=Where+the+simpsons+live')
+      .send('name=Springfield&description=Where+the+simpsons+live')
       .expect(/Springfield/, done);
+  });
+
+  it('Validates city name and description', function(done) {
+    request(app)
+      .post('/cities')
+      .send('name=&description=')
+      .expect(400, done);
   });
 });
 

@@ -8,7 +8,7 @@ function DocumentReady() {
     event.preventDefault();
     var queryString = serializeForm(form);
     // console.log('submitting', queryString);
-    post('cities', queryString, postNewBlockCallback);
+    post('cities', queryString, postNewBlockCallback, postNewBlockError);
   };
 
   document.querySelector('.cities').onclick = function(event) {
@@ -38,12 +38,16 @@ function DocumentReady() {
 
   // Handling Ajax calls via plain JavaScript source: http://code.tutsplus.com/articles/how-to-make-ajax-requests-with-raw-javascript--net-4855
 
+  var postNewBlockError = function() {
+    alert('Invalid City');
+  };
+
   var postNewBlockCallback = function(xhr) {
     var data = JSON.parse(xhr.responseText);
     // console.log(xhr, data);
     appendToList([data]);
     form.reset();
-  }
+  };
 
   var getBlocksCallback = function(xhr) {
     var data = JSON.parse(xhr.responseText);
@@ -79,21 +83,21 @@ function DocumentReady() {
     }).join('&');
   }
 
-  function post(url, data, callback) {
-    var request = new Request(callback);
+  function post(url, data, callback, error) {
+    var request = new Request(callback, error);
     request.open('POST', url, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(data);
   }
 
-  function get(url, callback) {
-    var request = new Request(callback);
+  function get(url, callback, error) {
+    var request = new Request(callback, error);
     request.open('GET', url, true);
     request.send('');
   }
 
-  function remove(url, callback) {
-    var request = new Request(callback);
+  function remove(url, callback, error) {
+    var request = new Request(callback, error);
     request.open('DELETE', url, true);
     request.send('');
   }
@@ -140,7 +144,7 @@ function DocumentReady() {
           case (xhr.status >= 200 && xhr.status < 400):
             successCallback(xhr);
             break;
-          case (xhr.status > 400):
+          case (xhr.status >= 400):
             errorCallback && errorCallback(xhr) || console.error(xhr.responseText);
             break;
           default:
