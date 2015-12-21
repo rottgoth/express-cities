@@ -41,3 +41,19 @@ describe('Listing cities on /cities', function() {
       .expect(JSON.stringify(['Colima', 'San Francisco', 'Oakland']), done);
   });
 });
+
+describe('Creating new cities', function() {
+  it('Returns a 201 status code', function(done) {
+    request(app)
+      .post('/cities')
+      .send('name=Springfield&descriptions=Where+the+simpsons+live')
+      .expect(201, done);
+  });
+
+  it('Return a city name', function(done) {
+    request(app)
+      .post('/cities')
+      .send('name=Springfield&descriptions=Where+the+simpsons+live')
+      .expect(/Springfield/, done);
+  });
+});
