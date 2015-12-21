@@ -1,0 +1,19 @@
+{
+  "name": "building-blocks",
+  "version": "1.0.0",
+  "description": "Example application using express.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test.js",
+    "testw": "mocha -w app.js test.js"
+  },
+  "author": "Rob Cataneo <robcataneo@gmail.com> (https://github.com/rottgoth)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.13.3"
+  },
+  "devDependencies": {
+    "mocha": "2.3.4",
+    "supertest": "1.1.0"
+  }
+}
